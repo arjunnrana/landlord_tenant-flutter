@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "788608038436",
+    "project_id": "landlord-tenant-50a98",
+    "storage_bucket": "landlord-tenant-50a98.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:788608038436:android:a69aff55f6044ce1d90ab1",
+        "android_client_info": {
+          "package_name": "com.example.landlord_tenent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "788608038436-627vkrulbpfv6ueinjm3frqeu5vgddh8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3N-P5Te-szuu7RpecNzXW38KvF3KILj0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "788608038436-627vkrulbpfv6ueinjm3frqeu5vgddh8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
