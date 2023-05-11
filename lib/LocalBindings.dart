@@ -2,23 +2,26 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:async';
 
 class LocalStorageBindings {
+  AndroidOptions _getAndroidOptions() => const AndroidOptions(
+        encryptedSharedPreferences: true,
+      );
   final storage = const FlutterSecureStorage();
-
-  Future<void> writeValue({required String key, dynamic value}) async {
+  Future<void> write({required String key, dynamic value}) async {
     return await storage.write(key: key, value: value);
   }
 
   void deleteValue(String key) async {
-    storage.delete(key: key);
+    storage.delete(key: key, aOptions: _getAndroidOptions());
   }
 
-  Future<dynamic> readValue(String key) async {
-    String? value = await storage.read(key: key);
+  Future<String?> readValue(String key) async {
+    String? value =
+        await storage.read(key: key, aOptions: _getAndroidOptions());
     return value;
   }
 
   void deleteAll() async {
-    storage.deleteAll();
+    storage.deleteAll(aOptions: _getAndroidOptions());
   }
 
   Future readAll() async {
@@ -35,20 +38,20 @@ class LocalStorage {
     return sharedInstance;
   }
 
-  Future<String> loadUserRef(String key) async {
+  Future<String?> loadUserRef(String key) async {
     return await localStorageBindings.readValue(key);
   }
 
   Future<dynamic> setUserRef({required String key, dynamic value}) async {
-    localStorageBindings.writeValue(key: key, value: value);
+    localStorageBindings.write(key: key, value: value);
   }
 
-  Future<String> loadAuthStatus(String key) async {
+  Future<String?> loadAuthStatus(String key) async {
     return await localStorageBindings.readValue(key);
   }
 
-  Future<dynamic> setAuthStatus({required String key, dynamic value}) async {
-    localStorageBindings.writeValue(key: key, value: value);
+  Future<void> setAuthStatus({required String key, dynamic value}) async {
+    localStorageBindings.write(key: key, value: value);
   }
 
   LocalStorageBindings localStorageBindings = LocalStorageBindings();
@@ -56,7 +59,7 @@ class LocalStorage {
   LocalStorage._internal();
 
   void writeValue({required String key, dynamic value}) {
-    localStorageBindings.writeValue(key: key, value: value);
+    localStorageBindings.write(key: key, value: value);
   }
 
   void deleteValue(String key) async {

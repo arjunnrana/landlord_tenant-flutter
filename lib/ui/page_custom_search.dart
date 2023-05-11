@@ -79,7 +79,7 @@ class CustomSearchState extends State<CustomSearchPage> {
 
   void _search() async {
     var userRef =
-        await LocalStorage.sharedInstance.loadUserRef(Constants.userRef!!);
+        await LocalStorage.sharedInstance.loadUserRef(Constants.userRef);
     Navigator.push(
         context, MaterialPageRoute(builder: (_) => SearchResultPage(userRef)));
     // Write Your code to create query and show result on page_search

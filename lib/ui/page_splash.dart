@@ -10,6 +10,8 @@ import 'page_home.dart';
 import 'page_onboarding.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -19,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 4), () {
+    Timer(const Duration(seconds: 4), () {
       navigateFromSplash();
     });
   }
@@ -28,14 +30,14 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     FlutterStatusbarcolor.setStatusBarWhiteForeground(false);
     FlutterStatusbarcolor.setNavigationBarWhiteForeground(false);
-    FlutterStatusbarcolor.setStatusBarColor(Color(0xfff8f5f0));
+    FlutterStatusbarcolor.setStatusBarColor(const Color(0xfff8f5f0));
     size = Screen(MediaQuery.of(context).size);
     return Scaffold(
       body: ResponsiveContainer(
         widthPercent: 100,
         heightPercent: 100,
         child: Container(
-          color: Color(0xfff8f5f0), // white color
+          color: const Color(0xfff8f5f0), // white color
           //color: Color(0xff1869d9),  // blue color
           child: Image.asset('assets/city.gif' // white gif
               //'assets/gif/city_blue.gif'  // blue gif
@@ -47,13 +49,15 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future navigateFromSplash() async {
     String? isOnBoard =
-        await LocalStorage.sharedInstance.readValue(Constants.isOnBoard!);
+        await LocalStorage.sharedInstance.readValue(Constants.isOnBoard);
+    print("onboard : $isOnBoard");
     String? isLoggedIn =
-        await LocalStorage.sharedInstance.loadAuthStatus(Constants.isLoggedIn!);
+        await LocalStorage.sharedInstance.loadAuthStatus(Constants.isLoggedIn);
+    print("isLoggedIn : $isLoggedIn");
     if (isOnBoard == null || isOnBoard == "0") {
       //Navigate to OnBoarding Screen.
       LocalStorage.sharedInstance
-          .setAuthStatus(key: Constants.isLoggedIn!, value: "false");
+          .setAuthStatus(key: Constants.isLoggedIn, value: "false");
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => OnBoardingPage()));
     } else {

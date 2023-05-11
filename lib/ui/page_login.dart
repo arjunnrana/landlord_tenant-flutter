@@ -51,15 +51,15 @@ class _LoginPageState extends State<LoginPage> {
             .signInWithEmailAndPassword(email: _email!, password: _password!);
         Fluttertoast.showToast(msg: 'Log In Successful');
         //print("signed in  ${user.user.uid}");
-        LocalStorage.sharedInstance
+        await LocalStorage.sharedInstance
             .setAuthStatus(key: Constants.isLoggedIn!, value: "true");
         FirebaseFirestore.instance
             .collection('User')
             .where('uid', isEqualTo: user.user!.uid)
             .snapshots()
-            .listen((data) {
+            .listen((data) async {
           print('Docfound :  ${data.docs[0].id}');
-          LocalStorage.sharedInstance.setUserRef(
+          await LocalStorage.sharedInstance.setUserRef(
               key: Constants.userRef!, value: data.docs[0].id.toString());
         });
         Navigator.pushReplacement(

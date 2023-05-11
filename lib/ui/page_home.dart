@@ -20,7 +20,7 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   Screen? size;
   int _selectedIndex = -1;
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<Property> recentList = [];
   List<Property> topList = [];
   var citiesList = [
@@ -42,9 +42,9 @@ class _SearchPageState extends State<SearchPage> {
 
   void getUserDetails() async {
     //isLoggedIn= await LocalStorage.sharedInstance.loadAuthStatus(Constants.isLoggedIn);
-    docRef = await LocalStorage.sharedInstance.loadUserRef(Constants.userRef!!);
-    print('docRef :' + docRef!);
+    docRef = await LocalStorage.sharedInstance.loadUserRef(Constants.userRef);
     if (docRef != "NULL") {
+      print('docRef :' + docRef!);
       FirebaseFirestore.instance
           .doc('/User/' + docRef!)
           .get()
@@ -155,13 +155,17 @@ class _SearchPageState extends State<SearchPage> {
             statusBarIconBrightness: Brightness.dark,
             systemNavigationBarIconBrightness: Brightness.dark,
             systemNavigationBarColor: backgroundColor),
-        child: Container(
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[upperPart()],
-            ),
-          ),
-        ),
+        child: docsSnap != null
+            ? Container(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[upperPart()],
+                  ),
+                ),
+              )
+            : Container(
+                child: const CircularProgressIndicator(),
+              ),
       ),
       drawer: docsSnap != null
           ? drawer(

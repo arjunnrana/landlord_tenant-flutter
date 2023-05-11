@@ -50,7 +50,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
           stream: FirebaseFirestore.instance.collection('House').snapshots(),
           builder: (context, snapshot) {
             return (snapshot.connectionState == null)
-                ? new Center(
+                ? Center(
                     child: CircularProgressIndicator(
                       backgroundColor: Colors.blue[700]!,
                     ),
@@ -74,7 +74,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
                                 )
                               : SizedBox(height: 0),
                           Container(
-                              padding: new EdgeInsets.symmetric(horizontal: 10),
+                              padding: EdgeInsets.symmetric(horizontal: 10),
                               child:
                                   getCard(docsSnap, context, index, userRef)),
                         ],
@@ -132,7 +132,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12.0),
             ),
-            margin: new EdgeInsets.all(8),
+            margin: EdgeInsets.all(8),
             borderOnForeground: true,
             child: InkWell(
               onTap: () {
@@ -249,9 +249,9 @@ class _SearchResultPageState extends State<SearchResultPage> {
                   width: 40.0,
                   height: 40.0,
                   color: Colors.white,
-                  child: new RawMaterialButton(
+                  child: RawMaterialButton(
                     elevation: 10.0,
-                    child: new Icon(
+                    child: Icon(
                       Icons.favorite,
                       color: _isPressed[index] ? Colors.blue[700] : Colors.grey,
                     ),
@@ -312,7 +312,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
     return Row(
       children: <Widget>[
         IconButton(
-          padding: new EdgeInsets.fromLTRB(1, 0, 0, 0),
+          padding: EdgeInsets.fromLTRB(1, 0, 0, 0),
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,

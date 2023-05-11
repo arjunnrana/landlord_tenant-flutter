@@ -110,7 +110,7 @@ class _HouseDetailState extends State<HouseDetail> {
     });
     print('Outside 108');
     userReference =
-        await LocalStorage.sharedInstance.loadUserRef(Constants.userRef!);
+        await LocalStorage.sharedInstance.loadUserRef(Constants.userRef);
     FirebaseFirestore.instance
         .doc('/User/' + userReference)
         .get()

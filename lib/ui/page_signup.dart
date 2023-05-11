@@ -11,12 +11,14 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 // SIGNUP STARTS HERE
 class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
+
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  final _formKey = new GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   String? _email;
   String? _password;
   String? _phoneNo;
@@ -66,8 +68,8 @@ class _SignUpPageState extends State<SignUpPage> {
         print("signed in  ${user.user!.uid}");
         _uid = user.user!.uid;
         try {
-          LocalStorage.sharedInstance
-              .setAuthStatus(key: Constants.isLoggedIn!, value: "true");
+          await LocalStorage.sharedInstance
+              .setAuthStatus(key: Constants.isLoggedIn, value: "true");
         } catch (e) {
           print("An error occured while trying to send email verification");
         }
@@ -76,20 +78,20 @@ class _SignUpPageState extends State<SignUpPage> {
             .collection('User')
             .where('uid', isEqualTo: _uid)
             .snapshots()
-            .listen((data) {
+            .listen((data) async {
           print('Docfound :  ${data.docs[0].id}');
-          LocalStorage.sharedInstance
-              .setUserRef(key: Constants.userRef!, value: data.docs[0].id);
+          await LocalStorage.sharedInstance
+              .setUserRef(key: Constants.userRef, value: data.docs[0].id);
         });
         Fluttertoast.showToast(msg: "Account Resgistered Successfully");
         FirebaseFirestore.instance
             .collection('User')
             .where('uid', isEqualTo: user.user!.uid)
             .snapshots()
-            .listen((data) {
+            .listen((data) async {
           print('Docfound :  ${data.docs[0].id}');
-          LocalStorage.sharedInstance.setUserRef(
-              key: Constants.userRef!, value: data.docs[0].id.toString());
+          await LocalStorage.sharedInstance
+              .setUserRef(key: Constants.userRef, value: data.docs[0].id);
         });
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => SearchPage()));

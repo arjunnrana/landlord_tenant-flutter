@@ -8,9 +8,9 @@ class Constants {
   static const Color clr_orange = const Color(0xFFFF682D);
   static const Color clr_light_grey = const Color(0xAAD3D3D3);
 
-  static String? isOnBoard = "IS_ONBOARD";
-  static String? isLoggedIn = "IS_LOGGED_IN";
-  static String? userRef = "USER_REF";
+  static String isOnBoard = "IS_ONBOARD";
+  static String isLoggedIn = "IS_LOGGED_IN";
+  static String userRef = "USER_REF";
   //Validations REGEX
   static final String? PATTERN_EMAIL =
       "^([0-9a-zA-Z]([-.+\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})\$";
